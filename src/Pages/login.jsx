@@ -13,7 +13,6 @@ export default () => {
   const [passwordAlert, setPasswordAlert] = useState(null);
 
   function checkUsername(userName) {
-
     if (userName == null) {
       setUserNameAlert("Please enter user name.");
     }
@@ -23,7 +22,6 @@ export default () => {
   }
 
   function checkPassword(password) {
-
     if (password == null) {
       setPasswordAlert("Please enter password.");
     }
@@ -36,7 +34,6 @@ export default () => {
   }
 
   function handleClick() {
-
     if (pwalert == null && unalert == null) {
       localStorage.setItem("UserName", userName);
       navigate("/welcome");
@@ -55,9 +52,7 @@ export default () => {
               placeholder="User Name"
               value={userName}
               onBlur={() => {
-
                 setUserNameActivated(true);
-
                 checkUsername(userName);
 
               }}
@@ -78,9 +73,7 @@ export default () => {
               type="password"
               placeholder="Password"
               onBlur={() => {
-
-                 setPasswordActivated(true);
-
+                setPasswordActivated(true);
                 checkPassword(password);
                 
               }}
