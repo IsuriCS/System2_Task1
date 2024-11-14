@@ -17,7 +17,6 @@ export default () => {
   const [isInputsValid, setInputValid] = useState(null);
 
   function checkUsername(userName) {
-
     if (userName == null) {
       setUserNameAlert("User Name Is Required");
     }
@@ -27,7 +26,6 @@ export default () => {
   }
 
   function checkPassword(password) {
-
     if (password == null) {
       setPasswordAlert("Password is Required.");
     }
@@ -60,7 +58,6 @@ export default () => {
               value={userName}
               onBlur={() => {
                 setUserNameActivated(true);
-
                 checkUsername(userName);
               }}
               Onchange={(e) => setUserName(e.target.value)}
@@ -79,7 +76,6 @@ export default () => {
               value={password}
               onBlur={() => {
                 setPasswordActivated(true);
-
                 checkPassword(password);
               }}
               Onchange={(e) => setPassword(e.target.value)}
