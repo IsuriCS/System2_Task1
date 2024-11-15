@@ -17,7 +17,7 @@ export default () => {
 
   function checkUsername(userName) {
     if (userName == null) {
-      setUserNameAlert("User Name Is Required");
+      setUserNameAlert("Username is required");
     } else {
       setUserNameAlert(null);
     }
@@ -25,7 +25,7 @@ export default () => {
 
   function checkPassword(password) {
     if (password == null) {
-      setPasswordAlert("Password is Required.");
+      setPasswordAlert("Password is required.");
     } else {
       setPasswordAlert(null);
     }
