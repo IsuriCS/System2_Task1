@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { InputFiled } from '../../Components/Input';
 
 export default () => {
   const navigate = useNavigate();
@@ -12,28 +13,30 @@ export default () => {
   const [userNameAlert, setUserNameAlert] = useState(null);
   const [passwordAlert, setPasswordAlert] = useState(null);
 
-  function checkUsername () {
+  const [isInputsValid, setInputValid] = useState(null);
+
+  function checkUsername(userName) {
     if (userName == null) {
-      setUserNameAlert("Please enter user name.");
+      setUserNameAlert("User Name Is Required");
     } else {
       setUserNameAlert(null);
     }
-  };
+  }
 
   function checkPassword(password) {
     if (password == null) {
-      setPasswordAlert("Please enter password.");
-    } else if (password.length < 5) {
-      setPasswordAlert("Password should be longer than 5 charactors.");
+      setPasswordAlert("Password is Required.");
     } else {
       setPasswordAlert(null);
     }
   }
 
   function handleClick() {
-    if (passwordAlert == null && userNameAlert == null) {
-      localStorage.setItem("UserName", userName);
+    if (userName === "testUser" && password === "abc123") {
+      setInputValid(true);
       navigate("/welcome");
+    } else {
+      setInputValid(false);
     }
   }
 
@@ -43,19 +46,16 @@ export default () => {
         <h1 className="text-4xl font-bold text-darkRed font-sans">Log In</h1>
         <div className="flex flex-col  space-y-4 w-full">
           <div className="w-full">
-            <input
+            <InputFiled
               type="text"
-              placeholder="User Name"
+              placeHolder="User Name"
               value={userName}
               onBlur={() => {
                 setUserNameActivated(true);
-
                 checkUsername(userName);
               }}
-              onChange={(e) => setUserName(e.target.value)}
-              className="border border-Gray p-1 rounded-md drop-shadow w-full"
+              Onchange={(e) => setUserName(e.target.value)}
             />
-
             {isUsernameActivated && (
               <div>
                 <p className="text-red text-xs">{userNameAlert}</p>
@@ -64,19 +64,16 @@ export default () => {
           </div>
 
           <div className="w-full">
-            <input
+            <InputFiled
               type="password"
-              placeholder="Password"
+              placeHolder="Password"
+              value={password}
               onBlur={() => {
                 setPasswordActivated(true);
-
                 checkPassword(password);
               }}
-              className="border p-1 rounded-md border-Gray drop-shadow w-full"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              Onchange={(e) => setPassword(e.target.value)}
             />
-
             {isPasswordActivated && (
               <div>
                 <p className="text-red text-xs">{passwordAlert}</p>
@@ -84,6 +81,13 @@ export default () => {
             )}
           </div>
         </div>
+
+        {isInputsValid === false && (
+          <div>
+            <p className="text-red text-xs">Invalid Username or Password</p>
+          </div>
+        )}
+
         <div>
           <button
             className="px-7 py-4 text-white  bg-button rounded-full hover:bg-buttonHover active:bg-buttonHover"
