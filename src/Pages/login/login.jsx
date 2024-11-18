@@ -49,7 +49,7 @@ export default () => {
               value={userName}
               onBlur={() => {
                 setUserNameActivated(true);
-                checkUsername(userName);
+                checkUsername();
               }}
               onChange={(e) => setUserName(e.target.value)}
               className="border border-Gray p-1 rounded-md drop-shadow w-full"
@@ -68,7 +68,7 @@ export default () => {
               placeholder="Password"
               onBlur={() => {
                 setPasswordActivated(true);
-                checkPassword(password);
+                checkPassword();
               }}
               className="border p-1 rounded-md border-Gray drop-shadow w-full"
               value={password}
