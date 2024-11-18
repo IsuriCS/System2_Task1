@@ -20,7 +20,7 @@ export default () => {
     }
   },[userName]);
 
-  const checkPassword=useCallback(()=>{
+  const checkPassword = useCallback(()=>{
     if (password == null) {
       setPasswordAlert("Please enter password.");
     } else if (password.length < 5) {
