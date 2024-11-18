@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default () => {
@@ -12,15 +12,15 @@ export default () => {
   const [userNameAlert, setUserNameAlert] = useState(null);
   const [passwordAlert, setPasswordAlert] = useState(null);
 
-  function checkUsername () {
+  const checkUsername = useCallback(() => {
     if (userName == null) {
       setUserNameAlert("Please enter user name.");
     } else {
       setUserNameAlert(null);
     }
-  };
+  },[userName]);
 
-  function checkPassword(password) {
+  const checkPassword=useCallback(()=>{
     if (password == null) {
       setPasswordAlert("Please enter password.");
     } else if (password.length < 5) {
@@ -28,9 +28,9 @@ export default () => {
     } else {
       setPasswordAlert(null);
     }
-  }
-
-  function handleClick() {
+  }, [password]) 
+  
+  function handleLogin() {
     if (passwordAlert == null && userNameAlert == null) {
       localStorage.setItem("UserName", userName);
       navigate("/welcome");
@@ -49,7 +49,6 @@ export default () => {
               value={userName}
               onBlur={() => {
                 setUserNameActivated(true);
-
                 checkUsername(userName);
               }}
               onChange={(e) => setUserName(e.target.value)}
@@ -69,7 +68,6 @@ export default () => {
               placeholder="Password"
               onBlur={() => {
                 setPasswordActivated(true);
-
                 checkPassword(password);
               }}
               className="border p-1 rounded-md border-Gray drop-shadow w-full"
@@ -87,7 +85,7 @@ export default () => {
         <div>
           <button
             className="px-7 py-4 text-white  bg-button rounded-full hover:bg-buttonHover active:bg-buttonHover"
-            onClick={handleClick}
+            onClick={handleLogin}
           >
             Log In
           </button>
