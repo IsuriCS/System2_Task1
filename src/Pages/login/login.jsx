@@ -14,7 +14,6 @@ export default () => {
   const [passwordAlert, setPasswordAlert] = useState(null);
 
   const [isInputsValid, setInputsValid] = useState(false);
-
   const [isLoginClicked, setLoginClicked] = useState(false);
 
   const checkUsername = useCallback(() => {
@@ -34,6 +33,7 @@ export default () => {
   }, [password]);
 
   const handleLogin = useCallback(() => {
+    setLoginClicked(true);
     if (userName === "testUser" && password === "abc123") {
       setInputsValid(true);
       navigate("/welcome");
@@ -93,10 +93,7 @@ export default () => {
         <div>
           <button
             className="px-7 py-4 text-white  bg-button rounded-full hover:bg-buttonHover active:bg-buttonHover"
-            onClick={() => {
-              setLoginClicked(true);
-              handleLogin();
-            }}
+            onClick={handleLogin()}
           >
             Log In
           </button>

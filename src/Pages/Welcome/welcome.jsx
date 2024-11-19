@@ -4,7 +4,6 @@ import { TextArea } from "../../Components/Input";
 
 export default () => {
   const [typeText, setTypeText] = useState("");
-
   return (
     <div className="w-screen h-screen bg-bgColor flex items-center justify-center flex-col">
       <h1 className="text-6xl">Hi</h1>

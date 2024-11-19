@@ -4,7 +4,7 @@
  * @param {Object} props - The props object for the InputField component.
  * @param {string} props.type - The type of the input field (e.g., "text", "password").
  * @param {string} props.placeholder - The placeholder text for the input field.
- * @param {function} [props.onBlur] - The event handler function for the input field's onBlur event.
+ * @param {function} props.onBlur - The event handler function for the input field's onBlur event.
  * @param {string} props.value - The current value of the input field.
  * @param {function} props.onChange - The event handler function for the input field's onChange event.
  * @returns {JSX.Element} A styled input field.
