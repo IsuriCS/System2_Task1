@@ -11,7 +11,7 @@ export default () => {
       <img src={Wave} alt="" />
 
       <TextArea
-        placeHolder="Type something here"
+        placeholder="Type something here"
         value={typeText}
         onChange={(e) => setTypeText(e.target.value)}
       />
