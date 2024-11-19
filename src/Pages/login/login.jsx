@@ -93,7 +93,7 @@ export default () => {
         <div>
           <button
             className="px-7 py-4 text-white  bg-button rounded-full hover:bg-buttonHover active:bg-buttonHover"
-            onClick={handleLogin()}
+            onClick={handleLogin}
           >
             Log In
           </button>
