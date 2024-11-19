@@ -1,11 +1,12 @@
 import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { InputField } from "../../Components/Input";
+import loginPost from "../../API/LoginAPI";
 
 export default () => {
   const navigate = useNavigate();
-  const [userName, setUserName] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
 
   const [isUsernameActivated, setUserNameActivated] = useState(false);
   const [isPasswordActivated, setPasswordActivated] = useState(false);
@@ -17,7 +18,7 @@ export default () => {
   const [isLoginClicked, setLoginClicked] = useState(false);
 
   const checkUsername = useCallback(() => {
-    if (userName == null) {
+    if (userName == "") {
       setUserNameAlert("Username is required");
     } else {
       setUserNameAlert(null);
@@ -25,22 +26,23 @@ export default () => {
   }, [userName]);
 
   const checkPassword = useCallback(() => {
-    if (password == null) {
+    if (password == "") {
       setPasswordAlert("Password is required.");
     } else {
       setPasswordAlert(null);
     }
   }, [password]);
 
-  const handleLogin = useCallback(() => {
-    setLoginClicked(true);
-    if (userName === "testUser" && password === "abc123") {
+  const handleLogin = useCallback(async () => {
+    setLoginClicked(true); 
+    const status = await loginPost(userName, password);
+    if (status == "200") {
       setInputsValid(true);
       navigate("/welcome");
     } else {
       setInputsValid(false);
     }
-  }, [isLoginClicked]);
+  }, [userName, password, isInputsValid, isLoginClicked, navigate]);
 
   return (
     <div className="border flex justify-center align-center items-center bg-bgColor h-screen">
@@ -84,6 +86,7 @@ export default () => {
           </div>
         </div>
 
+       
         {!isInputsValid && isLoginClicked && (
           <div>
             <p className="text-red text-xs">Invalid Username or Password</p>
@@ -92,7 +95,7 @@ export default () => {
 
         <div>
           <button
-            className="px-7 py-4 text-white  bg-button rounded-full hover:bg-buttonHover active:bg-buttonHover"
+            className="px-7 py-4 text-white bg-button rounded-full hover:bg-buttonHover active:bg-buttonHover"
             onClick={handleLogin}
           >
             Log In
