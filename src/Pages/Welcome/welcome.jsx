@@ -14,7 +14,7 @@ export default () => {
       <TextArea
         placeHolder="Type something here"
         value={typeText}
-        Onchange={(e) => setTypeText(e.target.value)}
+        onChange={(e) => setTypeText(e.target.value)}
       />
     </div>
   );

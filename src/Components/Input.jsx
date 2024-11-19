@@ -6,10 +6,10 @@
  * @param {string} props.placeholder - The placeholder text for the input field.
  * @param {function} [props.onBlur] - The event handler function for the input field's onBlur event.
  * @param {string} props.value - The current value of the input field.
- * @param {function} props.Onchange - The event handler function for the input field's onChange event.
+ * @param {function} props.onChange - The event handler function for the input field's onChange event.
  * @returns {JSX.Element} A styled input field.
  */
-function InputField({ type, placeholder, onBlur, value, onchange }) {
+function InputField({ type, placeholder, onBlur, value, onChange }) {
   return (
     <input
       type={type}
@@ -17,7 +17,7 @@ function InputField({ type, placeholder, onBlur, value, onchange }) {
       onBlur={onBlur}
       className="border p-1 rounded-md border-Gray drop-shadow w-full"
       value={value}
-      onChange={onchange}
+      onChange={onChange}
     />
   );
 }
@@ -28,10 +28,10 @@ function InputField({ type, placeholder, onBlur, value, onchange }) {
  * @param {Object} props - The props object for the TextArea component.
  * @param {string} props.placeholder - The placeholder text for the textarea.
  * @param {string} props.value - The current value of the textarea.
- * @param {function} props.Onchange - The event handler function for the textarea's onChange event.
+ * @param {function} props.onChange - The event handler function for the textarea's onChange event.
  * @returns {JSX.Element} A styled textarea element.
  */
-function TextArea({ placeholder, value, onchange }) {
+function TextArea({ placeholder, value, onChange }) {
   return (
     <textarea
       placeholder={placeholder}
@@ -39,7 +39,7 @@ function TextArea({ placeholder, value, onchange }) {
       cols="30"
       className="border p-2 rounded-md border-Gray drop-shadow"
       value={value}
-      onChange={onchange}
+      onChange={onChange}
     />
   );
 }

@@ -56,7 +56,7 @@ export default () => {
                 setUserNameActivated(true);
                 checkUsername();
               }}
-              onchange={(e) => setUserName(e.target.value)}
+              onChange={(e) => setUserName(e.target.value)}
             />
             {isUsernameActivated && (
               <div>
@@ -74,7 +74,7 @@ export default () => {
                 setPasswordActivated(true);
                 checkPassword();
               }}
-              onchange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
             {isPasswordActivated && (
               <div>
