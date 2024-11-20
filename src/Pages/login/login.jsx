@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { InputField } from "../../Components/Input";
 import loginPost from "../../API/LoginAPI";
@@ -17,6 +17,11 @@ export default () => {
   const [isInputsValid, setInputsValid] = useState(false);
   const [isLoginClicked, setLoginClicked] = useState(false);
   const [isLoading, setLoading] = useState(false);
+
+  //Remove isAuthenticated variable form localStorage
+  useEffect(() => {
+    localStorage.removeItem("isAuthenticated");
+  }, []);
 
   //Check username field is not empty.
   const checkUsername = useCallback(() => {
@@ -45,6 +50,7 @@ export default () => {
       const status = await loginPost(userName, password);
       if (status == "200") {
         setInputsValid(true);
+        localStorage.setItem("isAuthenticated", "true"); 
         navigate("/welcome");
       } else {
         setInputsValid(false);
