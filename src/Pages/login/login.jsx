@@ -16,39 +16,53 @@ export default () => {
 
   const [isInputsValid, setInputsValid] = useState(false);
   const [isLoginClicked, setLoginClicked] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
+  //Check username field is not empty.
   const checkUsername = useCallback(() => {
-    if (userName == "") {
+    if (userName === "") {
       setUserNameAlert("Username is required");
     } else {
       setUserNameAlert(null);
     }
   }, [userName]);
 
+  //Check password field is not empty.
   const checkPassword = useCallback(() => {
-    if (password == "") {
+    if (password === "") {
       setPasswordAlert("Password is required.");
     } else {
       setPasswordAlert(null);
     }
   }, [password]);
 
+
   const handleLogin = useCallback(async () => {
-    setLoginClicked(true); 
-    const status = await loginPost(userName, password);
-    if (status == "200") {
-      setInputsValid(true);
-      navigate("/welcome");
-    } else {
+    setLoginClicked(true);
+    setLoading(true);
+
+    try {
+      const status = await loginPost(userName, password);
+      if (status == "200") {
+        setInputsValid(true);
+        navigate("/welcome");
+      } else {
+        setInputsValid(false);
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
       setInputsValid(false);
+      setLoading(false);
+    } finally {
+      setLoading(false);
     }
-  }, [userName, password, isInputsValid, isLoginClicked, navigate]);
+  }, [userName, password, navigate]);
 
   return (
     <div className="border flex justify-center align-center items-center bg-bgColor h-screen">
-      <div className="flex flex-col space-y-8 bg-white p-10   border-red w-[30rem] items-center rounded-lg drop-shadow ">
+      <div className="flex flex-col space-y-8 bg-white p-10 border-red w-[30rem] items-center rounded-lg drop-shadow">
         <h1 className="text-4xl font-bold text-darkRed font-sans">Log In</h1>
-        <div className="flex flex-col  space-y-4 w-full">
+        <div className="flex flex-col space-y-4 w-full">
           <div className="w-full">
             <InputField
               type="text"
@@ -86,19 +100,26 @@ export default () => {
           </div>
         </div>
 
-       
-        {!isInputsValid && isLoginClicked && (
-          <div>
-            <p className="text-red text-xs">Invalid Username or Password</p>
+        {isLoading ? (
+          <div className="flex justify-center items-center">
+            <p className="text-blue text-sm">Loading...</p>
           </div>
+        ) : (
+          !isInputsValid &&
+          isLoginClicked && (
+            <div>
+              <p className="text-red text-xs">Invalid Username or Password</p>
+            </div>
+          )
         )}
 
         <div>
           <button
             className="px-7 py-4 text-white bg-button rounded-full hover:bg-buttonHover active:bg-buttonHover"
             onClick={handleLogin}
+            disabled={isLoading}
           >
-            Log In
+            {isLoading ? "Logging In..." : "Log In"}
           </button>
         </div>
       </div>
