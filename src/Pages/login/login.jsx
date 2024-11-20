@@ -1,9 +1,10 @@
-import { useState, useCallback,useEffect } from "react";
+import React from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { InputField } from "../../Components/Input";
 import loginPost from "../../API/LoginAPI";
 
-export default () => {
+const loginPage = () => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -132,3 +133,5 @@ export default () => {
     </div>
   );
 };
+
+export default loginPage;

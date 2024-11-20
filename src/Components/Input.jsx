@@ -1,3 +1,6 @@
+import React from "react";
+import PropTypes from "prop-types";
+
 /**
  * This returns an input field of a given type.
  *
@@ -22,6 +25,15 @@ function InputField({ type, placeholder, onBlur, value, onChange }) {
   );
 }
 
+// Define PropTypes for InputField
+InputField.propTypes = {
+  type: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  onBlur: PropTypes.func,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
+
 /**
  * This returns a Text area.
  *
@@ -44,8 +56,11 @@ function TextArea({ placeholder, value, onChange }) {
   );
 }
 
-
-export {
-  InputField,
-  TextArea
+// Define PropTypes for TextArea
+TextArea.propTypes = {
+  placeholder: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
+
+export { InputField, TextArea };
