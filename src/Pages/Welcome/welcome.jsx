@@ -1,8 +1,9 @@
+import React from "react";
 import { useState } from "react";
 import Wave from "../../Assets/koala-hug.gif";
 import { TextArea } from "../../Components/Input";
 
-export default () => {
+const WelcomePage = () => {
   const [typeText, setTypeText] = useState("");
   return (
     <div className="w-screen h-screen bg-bgColor flex items-center justify-center flex-col">
@@ -18,3 +19,5 @@ export default () => {
     </div>
   );
 };
+
+export default WelcomePage;
